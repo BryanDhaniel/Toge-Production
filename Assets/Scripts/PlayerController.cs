@@ -61,7 +61,7 @@ public class PlayerScript : MonoBehaviour
     bool IsBlocked(Vector3 targetPos)
     {
         Collider2D hit = Physics2D.OverlapCircle(targetPos, 0.2f, collisionLayer);
-        Debug.Log("Cek posisi: " + targetPos + " | Kena: " + (hit != null ? hit.name : "TIDAK ADA"));
+        // Debug.Log("Cek posisi: " + targetPos + " | Kena: " + (hit != null ? hit.name : "TIDAK ADA"));
         return hit != null;
     }
 
