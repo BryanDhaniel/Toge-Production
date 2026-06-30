@@ -131,7 +131,13 @@ GameObject:
   - component: {fileID: 54593928}
   - component: {fileID: 54593927}
   - component: {fileID: 54593926}
-  - component: {fileID: 54593930}
+  - component: {fileID: 54593933}
+  - component: {fileID: 54593932}
+  - component: {fileID: 54593935}
+  - component: {fileID: 54593937}
+  - component: {fileID: 54593936}
+  - component: {fileID: 54593939}
+  - component: {fileID: 54593938}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -180,8 +186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 177
-    y: 123
+    x: 175
+    y: 122
     width: 161.26562
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -189,9 +195,13 @@ MonoBehaviour:
   itemId: 0
   blockName: NPC_Help_Dialogue
   description: 
-  eventHandler: {fileID: 54593930}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 54593926}
+  - {fileID: 54593939}
+  - {fileID: 54593936}
+  - {fileID: 54593938}
+  - {fileID: 54593937}
   suppressAllAutoSelections: 0
 --- !u!114 &54593928
 MonoBehaviour:
@@ -206,10 +216,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 67.86719, y: 89.5}
+  scrollPos: {x: 63.867188, y: 46.5}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
-  blockViewHeight: 402
+  blockViewHeight: 280
   zoom: 1
   scrollViewRect:
     serializedVersion: 2
@@ -219,8 +229,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 54593927}
-  selectedCommands:
-  - {fileID: 54593926}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 0
@@ -247,7 +256,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &54593930
+--- !u!114 &54593932
 MonoBehaviour:
   m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,13 +265,174 @@ MonoBehaviour:
   m_GameObject: {fileID: 54593924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000864f8e9e1748a39807861d0e60e29, type: 3}
+  m_Script: {fileID: 11500000, guid: 445c07472dafe4e0ead0e88c4b757401, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Fungus::Fungus.KeyPressed
-  parentBlock: {fileID: 54593927}
+  m_EditorClassIdentifier: Fungus::Fungus.MoveTo
+  itemId: 3
+  indentLevel: 0
+  _targetObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 108283510}
+  _tweenName:
+    stringRef: {fileID: 0}
+    stringVal: 
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 2
+  easeType: 2
+  loopType: 0
+  stopPreviousTweens: 0
+  waitUntilFinished: 1
+  targetObjectOLD: {fileID: 0}
+  tweenNameOLD: 
+  durationOLD: 0
+  _toTransform:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 0}
+  _toPosition:
+    vector3Ref: {fileID: 0}
+    vector3Val: {x: 10, y: 5.05, z: 0}
+  isLocal: 0
+  toTransformOLD: {fileID: 0}
+  toPositionOLD: {x: 0, y: 0, z: 0}
+--- !u!114 &54593933
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54593924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fungus::Fungus.Block
+  nodeRect:
+    serializedVersion: 2
+    x: 383.1328
+    y: 123.5
+    width: 135.28125
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 2
+  blockName: Cutscene_Intro
+  description: 
+  eventHandler: {fileID: 54593935}
+  commandList:
+  - {fileID: 54593932}
+  suppressAllAutoSelections: 0
+--- !u!114 &54593935
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54593924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fungus::Fungus.MessageReceived
+  parentBlock: {fileID: 54593933}
   suppressBlockAutoSelect: 0
-  keyPressType: 0
-  keyCode: 32
+  message: Yes
+--- !u!114 &54593936
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54593924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841589fc622bc494aa5405f416fa1301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fungus::Fungus.Menu
+  itemId: 6
+  indentLevel: 0
+  text: Iya
+  description: 
+  targetBlock: {fileID: 54593933}
+  hideIfVisited: 0
+  interactable:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  setMenuDialog: {fileID: 0}
+  hideThisOption:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+--- !u!114 &54593937
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54593924}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c43743931d28f43f89eced820d907351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fungus::Fungus.SendMessage
+  itemId: 5
+  indentLevel: 0
+  messageTarget: 0
+  _message:
+    stringRef: {fileID: 0}
+    stringVal: Yes
+  messageOLD: 
+--- !u!114 &54593938
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54593924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841589fc622bc494aa5405f416fa1301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fungus::Fungus.Menu
+  itemId: 8
+  indentLevel: 0
+  text: Tidak
+  description: 
+  targetBlock: {fileID: 0}
+  hideIfVisited: 0
+  interactable:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  setMenuDialog: {fileID: 0}
+  hideThisOption:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+--- !u!114 &54593939
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54593924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fungus::Fungus.Say
+  itemId: 7
+  indentLevel: 0
+  storyText: BIsakah kau membantuku membunuh Orc di dekat air
+  description: 
+  character: {fileID: 0}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
 --- !u!1 &108283510
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +446,7 @@ GameObject:
   - component: {fileID: 108283511}
   - component: {fileID: 108283514}
   - component: {fileID: 108283515}
+  - component: {fileID: 108283516}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -433,6 +604,33 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.0625, y: 1.25}
   m_Direction: 0
+--- !u!50 &108283516
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108283510}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &243492722
 GameObject:
   m_ObjectHideFlags: 0
@@ -10872,7 +11070,11 @@ MonoBehaviour:
         m_SelectedSource:
           rid: -2
         m_Provider2DCache:
-          rid: -2
+          rid: 8294908832228049038
+    - rid: 8294908832228049038
+      type: {class: 'Provider2DCache`1[[UnityEngine.Rendering.Universal.Light2DProvider, Unity.RenderPipelines.Universal.2D.Runtime]]', ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data:
+        m_Cache: []
 --- !u!4 &619394802
 Transform:
   m_ObjectHideFlags: 0
@@ -10983,7 +11185,7 @@ GameObject:
   - component: {fileID: 819724768}
   - component: {fileID: 819724767}
   - component: {fileID: 819724766}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11039,8 +11241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3335ab0f2c3911886a64d575e627e702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_Dialogue
-  flowchart: {fileID: 0}
-  blockName: 
+  flowchart: {fileID: 54593928}
+  blockName: NPC_Help_Dialogue
+  interactRange: 1.5
 --- !u!212 &819724768
 SpriteRenderer:
   serializedVersion: 3
@@ -11088,7 +11291,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2311659948842064771, guid: f3b2dc6587ba42f779748f25ee7e14fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11109,13 +11312,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819724765}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.0033062934, z: -0, w: 0.9999945}
   m_LocalPosition: {x: -10.31, y: 1.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.379, z: 0}
 --- !u!1 &1186718542
 GameObject:
   m_ObjectHideFlags: 0

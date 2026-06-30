@@ -1,30 +1,41 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Fungus;
 
 public class NPCInteractable : MonoBehaviour
 {
-    public Flowchart flowchart;       // drag GameObject Flowchart ke sini
-    public string blockName;          // nama block, misal "NPC_Toko_Dialog"
+    public Flowchart flowchart;
+    public string blockName = "NPC_Help_Dialogue";
+    public float interactRange = 1.5f;
 
-    private bool playerInRange = false;
+    private Transform player;
+    private bool isDialogueActive = false; // flag tambahan
 
-    void OnTriggerEnter2D(Collider2D other)
+    void Start()
     {
-        if (other.CompareTag("Player"))
-            playerInRange = true;
-    }
+        player = GameObject.FindWithTag("Player").transform;
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-            playerInRange = false;
+        // Subscribe ke event Fungus saat block selesai
+        flowchart.GetComponent<Flowchart>();
     }
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.Space))
+        if (player == null) return;
+
+        float distance = Vector2.Distance(transform.position, player.position);
+        bool playerInRange = distance <= interactRange;
+
+        if (playerInRange && Keyboard.current.spaceKey.wasPressedThisFrame && !isDialogueActive)
         {
+            isDialogueActive = true;
             flowchart.ExecuteBlock(blockName);
+        }
+
+        // Reset flag saat block sudah tidak jalan lagi
+        if (isDialogueActive && !flowchart.HasExecutingBlocks())
+        {
+            isDialogueActive = false;
         }
     }
 }
