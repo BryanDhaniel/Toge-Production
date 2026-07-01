@@ -13,23 +13,37 @@ public class BattleUnit : MonoBehaviour
     [HideInInspector] public int defense;
 
     public void Setup()
+{
+    if (isPlayerUnit)
     {
-        if (isPlayerUnit)
+        if (characterData == null)
         {
-            unitName = characterData.characterName;
-            maxHP = characterData.maxHP;
-            attack = characterData.attack;
-            defense = characterData.defense;
+            Debug.LogError("characterData belum diisi di Inspector! (" + gameObject.name + ")");
+            return;
         }
-        else
-        {
-            unitName = enemyData.enemyName;
-            maxHP = enemyData.maxHP;
-            attack = enemyData.attack;
-            defense = enemyData.defense;
-        }
-        currentHP = maxHP;
+        unitName = characterData.characterName;
+        maxHP = characterData.maxHP;
+        attack = characterData.attack;
+        defense = characterData.defense;
     }
+    else
+    {
+        // Cek BattleData dulu (dari world map), kalau kosong baru pakai Inspector
+        if (BattleData.enemyToFight != null)
+            enemyData = BattleData.enemyToFight;
+
+        if (enemyData == null)
+        {
+            Debug.LogError("enemyData belum diisi! (" + gameObject.name + ")");
+            return;
+        }
+        unitName = enemyData.enemyName;
+        maxHP = enemyData.maxHP;
+        attack = enemyData.attack;
+        defense = enemyData.defense;
+    }
+    currentHP = maxHP;
+}
 
     // Return true kalau masih hidup
     public bool TakeDamage(int damage)

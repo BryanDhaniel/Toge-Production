@@ -1,6 +1,7 @@
-// BattleManager.cs
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public enum BattleState
 {
@@ -20,6 +21,7 @@ public class BattleManager : MonoBehaviour
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
     public GameObject battleActionButtons; // panel tombol Attack/Skill/Run
+    public TextMeshProUGUI battleLogText;  // teks log pertarungan
 
     public BattleState currentState;
 
@@ -30,6 +32,12 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
+        // Ambil data enemy dari BattleData yang dikirim world map
+        if (BattleData.enemyToFight != null)
+        {
+            enemyUnit.enemyData = BattleData.enemyToFight;
+        }
+
         currentState = BattleState.Start;
         StartCoroutine(SetupBattle());
     }
@@ -43,8 +51,9 @@ public class BattleManager : MonoBehaviour
         enemyHUD.SetHUD(enemyUnit);
 
         battleActionButtons.SetActive(false);
+        SetBattleLog($"A wild {enemyUnit.unitName} appears!");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         PlayerTurn();
     }
@@ -52,7 +61,8 @@ public class BattleManager : MonoBehaviour
     void PlayerTurn()
     {
         currentState = BattleState.PlayerTurn;
-        battleActionButtons.SetActive(true); // tampilkan tombol
+        battleActionButtons.SetActive(true);
+        SetBattleLog("Your turn! Choose an action.");
     }
 
     // Dipanggil saat tombol "Attack" diklik
@@ -63,8 +73,23 @@ public class BattleManager : MonoBehaviour
         StartCoroutine(PlayerAttack());
     }
 
+    public void OnRunButton()
+    {
+        if (currentState != BattleState.PlayerTurn) return;
+        SetBattleLog("You fled from battle!");
+        StartCoroutine(RunAway());
+    }
+
+    IEnumerator RunAway()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("SampleScene");
+    }
+
     IEnumerator PlayerAttack()
     {
+        int dmg = Mathf.Max(1, playerUnit.attack - enemyUnit.defense);
+        SetBattleLog($"{playerUnit.unitName} attacks {enemyUnit.unitName} for {dmg} damage!");
         bool enemyAlive = enemyUnit.TakeDamage(playerUnit.attack);
         enemyHUD.UpdateHP(enemyUnit.currentHP);
 
@@ -84,9 +109,12 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
-        yield return new WaitForSeconds(1f); // delay sebelum enemy menyerang
+        SetBattleLog($"{enemyUnit.unitName} is preparing to strike...");
+        yield return new WaitForSeconds(1f);
 
+        int dmg = Mathf.Max(1, enemyUnit.attack - playerUnit.defense);
         bool playerAlive = playerUnit.TakeDamage(enemyUnit.attack);
+        SetBattleLog($"{enemyUnit.unitName} attacks {playerUnit.unitName} for {dmg} damage!");
         playerHUD.UpdateHP(playerUnit.currentHP);
 
         yield return new WaitForSeconds(1f);
@@ -104,19 +132,25 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator EndBattle()
     {
-        yield return new WaitForSeconds(1f);
-
         if (currentState == BattleState.Won)
         {
+            SetBattleLog("Victory! You defeated the enemy!");
             Debug.Log("Menang!");
-            // Load kembali ke world map
-            UnityEngine.SceneManagement.SceneManager.LoadScene("WorldMap");
         }
         else
         {
+            SetBattleLog("Defeated... Returning to World Map.");
             Debug.Log("Kalah!");
-            // Game over / reload
-            UnityEngine.SceneManagement.SceneManager.LoadScene("WorldMap");
         }
+
+        yield return new WaitForSeconds(2f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("WorldMap");
+    }
+
+    void SetBattleLog(string message)
+    {
+        if (battleLogText != null)
+            battleLogText.text = message;
+        Debug.Log($"[BattleLog] {message}");
     }
 }

@@ -641,6 +641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 243492724}
   - component: {fileID: 243492723}
+  - component: {fileID: 243492725}
   m_Layer: 0
   m_Name: Orc
   m_TagString: Untagged
@@ -723,6 +724,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &243492725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243492722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a24c46a58c780a979e888933e0f3cdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleTrigger
+  enemyData: {fileID: 11400000, guid: 5ae761966dc0ad54bb6e872af38bca2a, type: 2}
+  triggerRange: 1.5
 --- !u!1 &389761597
 GameObject:
   m_ObjectHideFlags: 0
